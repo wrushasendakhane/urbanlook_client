@@ -1,0 +1,40 @@
+/* .collectionPage {
+  display: flex;
+  flex-direction: column;
+}
+.collectionPage .title {
+  font-size: 38px;
+  margin: 0 auto 30px;
+}
+
+.collectionPage .items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+.collectionPage .items > .collection-item {
+  margin-bottom: 30px;
+} */
+
+.collection_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.preview_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media (max-width: 500px) {
+  .preview_container {
+    flex-direction: column;
+  }
+}
+.title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}

@@ -1,0 +1,9 @@
+.collection_item {
+  height: 350px;
+  display: flex;
+}
+
+.price {
+  height: 40px;
+  font-size: 15px;
+}
