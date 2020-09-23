@@ -9,7 +9,8 @@ import CartDropdown from "../cart-dropdown/CartDropdown";
 import { selectCurrentUser } from "../../redux/user/userSelectors";
 import { selectCartHidden } from "../../redux/cart/cartSelectors";
 import { createStructuredSelector } from "reselect";
-function Header({ currentUser, hidden }) {
+import { signOutStart } from "../../redux/user/userActions";
+function Header({ currentUser, hidden, signOutStart }) {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
@@ -58,7 +59,7 @@ function Header({ currentUser, hidden }) {
             <div
               className="nav-item nav-link"
               style={{ cursor: "pointer" }}
-              onClick={() => auth.signOut()}
+              onClick={signOutStart}
             >
               SIGN OUT
             </div>
@@ -88,4 +89,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   hidden: selectCartHidden,
 });
-export default connect(mapStateToProps)(Header);
+
+const mapDispatchToProps = (dispatch) => ({
+  signOutStart: () => dispatch(signOutStart()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

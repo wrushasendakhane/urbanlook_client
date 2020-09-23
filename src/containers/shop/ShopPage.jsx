@@ -5,10 +5,13 @@ import { Route } from "react-router-dom";
 import CollectionPage from "../collection/CollectionPage";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { fetchCollectionsStartAsync } from "../../redux/shop/shopActions";
+import {
+  fetchCollectionsStartAsync,
+  fetchCollectionsStart,
+} from "../../redux/shop/shopActions";
 import { selectIsFetching } from "../../redux/shop/shopSelector";
 
-function ShopPage({ match, isFetching, fetchCollectionsStartAsync }) {
+function ShopPage({ match, isFetching, fetchCollectionsStart }) {
   // const [loading, setLoading] = useState(true);
 
   /*
@@ -28,7 +31,7 @@ function ShopPage({ match, isFetching, fetchCollectionsStartAsync }) {
   */
 
   useEffect(() => {
-    fetchCollectionsStartAsync();
+    fetchCollectionsStart();
   }, []);
   return (
     <div className={classes.shopPage}>
@@ -55,8 +58,12 @@ function ShopPage({ match, isFetching, fetchCollectionsStartAsync }) {
 const mapStateToProps = createStructuredSelector({
   isFetching: selectIsFetching,
 });
+//This was for redux-thunk
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+// });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
