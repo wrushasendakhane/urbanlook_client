@@ -67,6 +67,18 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 
 }
 
+export const convertOrdersSnapshotToMap = (orders) => {
+  const transformedOrders = orders.docs.map(docSnapshot => {
+
+    return {
+      id: docSnapshot.id,
+      ...docSnapshot.data()
+    }
+  });
+
+  return transformedOrders;
+}
+
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged(userAuth => {
@@ -75,6 +87,25 @@ export const getCurrentUser = () => {
     }, reject)
   })
 }
+
+export const saveUserOrderDocument = async ({ uid, ...orderData }) => {
+  const ordersRef = firestore.doc(`users/${uid}`).collection("orders");
+  const snapshot = await ordersRef.get();
+
+  if (!snapshot.exists) {
+    const createdAt = new Date();
+
+    try {
+      await ordersRef.add({
+        createdAt, ...orderData
+      })
+    } catch (error) {
+      console.log("Error creating order", error.message)
+    }
+  }
+}
+
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 

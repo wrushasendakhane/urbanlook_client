@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/userSelectors';
 import { connect } from 'react-redux';
 import { checkUserSession } from './redux/user/userActions';
+import OrdersPage from './containers/orders/OrdersPage';
 
 function App({ currentUser, checkUserSession }) {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App({ currentUser, checkUserSession }) {
           render={() => currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />}
         />
         <Route path="/checkout" component={CheckoutPage} />
+        <Route path="/orders" component={OrdersPage} />
         <Route path="/" component={HomePage} />
       </Switch>
     </div>

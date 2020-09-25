@@ -1,14 +1,20 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import logo from "../../assets/logo.svg";
+import { checkoutStart } from "../../redux/checkout/checkoutActions";
+import { connect } from "react-redux";
 
-function StripeButton({ price }) {
+function StripeButton({ price, checkoutStart }) {
   const priceForStripe = price * 100;
 
   const onToken = (token) => {
-    console.log(token);
-    alert("Payment Successful");
+    const stripeData = {
+      amount: priceForStripe,
+      token,
+    };
+    checkoutStart(stripeData);
   };
+
   return (
     <StripeCheckout
       label="Pay Now"
@@ -20,9 +26,12 @@ function StripeButton({ price }) {
       panelLabel="Pay Now"
       token={onToken}
       image={logo}
-      stripeKey={process.env.REACT_APP_PUBLISHABLE_KEY}
+      stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
     />
   );
 }
 
-export default StripeButton;
+const mapDispatchToProps = (dispatch) => ({
+  checkoutStart: (stripeData) => dispatch(checkoutStart(stripeData)),
+});
+export default connect(null, mapDispatchToProps)(StripeButton);

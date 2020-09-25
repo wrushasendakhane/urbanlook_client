@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import classes from "./Header.module.css";
@@ -48,21 +48,24 @@ function Header({ currentUser, hidden, signOutStart }) {
           >
             SHOP
           </Link>
-          <Link
-            to="/shop"
-            className="nav-item nav-link"
-            onClick={handleNavCollapse}
-          >
-            CONTACT
-          </Link>
+
           {currentUser ? (
-            <div
-              className="nav-item nav-link"
-              style={{ cursor: "pointer" }}
-              onClick={signOutStart}
-            >
-              SIGN OUT
-            </div>
+            <Fragment>
+              <Link
+                to="/orders"
+                className="nav-item nav-link"
+                onClick={handleNavCollapse}
+              >
+                ORDERS
+              </Link>
+              <div
+                className="nav-item nav-link"
+                style={{ cursor: "pointer" }}
+                onClick={signOutStart}
+              >
+                SIGN OUT
+              </div>
+            </Fragment>
           ) : (
             <Link
               to="/signin"
