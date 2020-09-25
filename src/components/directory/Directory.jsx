@@ -8,7 +8,7 @@ import { selectDirectorySections } from "../../redux/directory/directorySelector
 function Directory({ sections }) {
   return (
     <div className={classes.directory}>
-      {sections.map(({ id, title, imageUrl, linkUrl, size }) => (
+      {sections?.map(({ id, title, imageUrl, linkUrl, size }) => (
         <MenuItem
           key={id}
           title={title}

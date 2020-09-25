@@ -28,7 +28,7 @@ export function* checkout({ payload }) {
     yield call(saveUserOrderDocument, { uid: currentUser.id, cartItems, total: payload.amount / 100, receiptUrl })
     yield put(checkoutSuccess())
   } catch (error) {
-    yield put(checkoutFailure(error));
+    yield put(checkoutFailure(error.message));
   }
 }
 

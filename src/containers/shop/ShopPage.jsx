@@ -1,35 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CollectionOverview from "../../components/collection-overview/CollectionOverview";
 import classes from "./ShopPage.module.css";
 import { Route } from "react-router-dom";
 import CollectionPage from "../collection/CollectionPage";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import {
-  fetchCollectionsStartAsync,
-  fetchCollectionsStart,
-} from "../../redux/shop/shopActions";
+import { fetchCollectionsStart } from "../../redux/shop/shopActions";
 import { selectIsFetching } from "../../redux/shop/shopSelector";
 
 function ShopPage({ match, isFetching, fetchCollectionsStart }) {
-  // const [loading, setLoading] = useState(true);
-
-  /*
-  useEffect(() => {
-    const collectionRef = firestore.collection("collections");
-    const unsubscribeFromSnapshot = collectionRef.onSnapshot(
-      async (snapshot) => {
-        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-        updateCollections(collectionsMap);
-        setLoading(false);
-      }
-    );
-    return () => {
-      unsubscribeFromSnapshot();
-    };
-  }, []);
-  */
-
   useEffect(() => {
     fetchCollectionsStart();
   }, []);

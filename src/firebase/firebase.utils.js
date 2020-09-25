@@ -49,9 +49,11 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   return await batch.commit();
 }
 
+
 export const convertCollectionsSnapshotToMap = (collections) => {
   const transformedCollection = collections.docs.map(docSnapshot => {
     const { title, items } = docSnapshot.data();
+    console.log(title)
     return {
       routeName: encodeURI(title.toLowerCase()),
       id: docSnapshot.id,
@@ -65,6 +67,18 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     return accumulator;
   }, {});
 
+}
+
+export const convertSectionsSnapshotToMap = (sections) => {
+  const transformedSections = sections.docs.map(docSnapshot => {
+
+    return {
+      id: docSnapshot.id,
+      ...docSnapshot.data()
+    }
+  });
+
+  return transformedSections;
 }
 
 export const convertOrdersSnapshotToMap = (orders) => {

@@ -1,7 +1,7 @@
 import CheckoutActionTypes from './checkoutActionTypes';
 
 const INITIAL_STATE = {
-  error: null
+  errorMessage: null
 }
 
 const checkoutReducer = (currentState = INITIAL_STATE, action) => {
@@ -9,12 +9,12 @@ const checkoutReducer = (currentState = INITIAL_STATE, action) => {
     case CheckoutActionTypes.CHECKOUT_SUCCESS:
       return {
         ...currentState,
-        error: null
+        errorMessage: null
       };
     case CheckoutActionTypes.CHECKOUT_FAILURE:
       return {
         ...currentState,
-        error: action.payload
+        errorMessage: action.payload
       };
     default:
       return currentState;

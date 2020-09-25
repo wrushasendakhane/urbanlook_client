@@ -12,10 +12,12 @@ import { selectCurrentUser } from './redux/user/userSelectors';
 import { connect } from 'react-redux';
 import { checkUserSession } from './redux/user/userActions';
 import OrdersPage from './containers/orders/OrdersPage';
+import { fetchSectionsStart } from './redux/directory/directoryActions';
 
-function App({ currentUser, checkUserSession }) {
+function App({ currentUser, checkUserSession, fetchSectionsStart }) {
   useEffect(() => {
-    checkUserSession()
+    checkUserSession();
+    fetchSectionsStart();
     return () => {
     }
   }, [])
@@ -40,7 +42,9 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 })
 
-const mapDispatchToProps = dispatch => ({
-  checkUserSession: () => dispatch(checkUserSession())
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+  fetchSectionsStart: () => dispatch(fetchSectionsStart())
+
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App);

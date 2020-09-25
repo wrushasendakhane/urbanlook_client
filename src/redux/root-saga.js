@@ -4,7 +4,8 @@ import { checkoutSagas } from "./checkout/checkoutSagas"
 import { orderSagas } from "./orders/ordersSagas"
 import { shopSagas } from "./shop/shopSagas"
 import { userSagas } from "./user/userSagas"
+import { directorySagas } from "./directory/directorySagas"
 
 export function* rootSaga() {
-  yield all([call(shopSagas), call(userSagas), call(cartSagas), call(checkoutSagas), call(orderSagas)])
+  yield all([call(shopSagas), call(userSagas), call(cartSagas), call(checkoutSagas), call(orderSagas), call(directorySagas)])
 }

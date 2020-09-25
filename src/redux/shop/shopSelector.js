@@ -18,3 +18,5 @@ export const selectCollectionForPreview = createSelector(
 )
 
 export const selectIsFetching = createSelector([selectShop], shop => shop.isFetching)
+
+export const selectError = createSelector([selectShop], (shop) => shop.errorMessage)

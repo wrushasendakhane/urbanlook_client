@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import dateformat from "dateformat";
@@ -33,7 +33,11 @@ function OrdersPage({ userOrders, isLoading, error, fetchOrders }) {
               <div className="col">${order.total}</div>
               <div className="col">
                 <div className="card-link">
-                  <a href={order.receiptUrl} target="_blank">
+                  <a
+                    href={order.receiptUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {" "}
                     Receipt
                   </a>

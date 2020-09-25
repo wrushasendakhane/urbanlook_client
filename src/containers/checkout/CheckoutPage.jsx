@@ -8,30 +8,13 @@ import {
 import { connect } from "react-redux";
 import CheckoutItem from "../../components/checkout-item/CheckoutItem";
 import StripeButton from "../../components/stripe-button/StripeButton";
+import { selectError } from "../../redux/checkout/checkoutSelectors";
+import { Redirect } from "react-router-dom";
 
-const CheckoutPage = ({ cartItems, total }) => {
+const CheckoutPage = ({ cartItems, total, error }) => {
   return (
-    // <div className={classes.checkoutPage}>
-    //   <div className={classes.checkoutHeader}>
-    //     <div className={classes.headerBlock}>Product</div>
-    //     <div className={classes.headerBlock}>Description</div>
-    //     <div className={classes.headerBlock}>Quantity</div>
-    //     <div className={classes.headerBlock}>Price</div>
-    //     <div className={classes.headerBlock}>Remove</div>
-    //   </div>
-
-    //   {cartItems.length ? (
-    //     cartItems.map((cartItem) => (
-    //       <CheckoutItem key={cartItem.id} item={cartItem} />
-    //     ))
-    //   ) : (
-    //     <div className="row">
-    //       <div className="col">Your cart is empty</div>
-    //     </div>
-    //   )}
-    //   <div className={classes.total}>TOTAL:${total}</div>
-    // </div>
     <Fragment>
+      {cartItems?.length === 0 && <Redirect to="/orders" />}
       <div className="row col-10 mx-auto">
         <div className="table-responsive">
           <table className="table">
@@ -57,7 +40,14 @@ const CheckoutPage = ({ cartItems, total }) => {
             </tbody>
           </table>
         </div>
-        <div className={classes.total}>TOTAL:${total}</div>
+        <div className="d-flex">
+          <div className={classes.total}>TOTAL:${total}</div>
+          {error && (
+            <div className="alert alert-danger text-center" role="alert">
+              {error}
+            </div>
+          )}
+        </div>
       </div>
       <StripeButton price={total} />
       <div className="alert alert-warning text-center" role="alert">
@@ -72,5 +62,6 @@ const CheckoutPage = ({ cartItems, total }) => {
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal,
+  error: selectError,
 });
 export default connect(mapStateToProps)(CheckoutPage);
