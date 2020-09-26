@@ -14,3 +14,6 @@ export const fetchOrdersSuccess = (orders) => ({
   payload: orders
 })
 
+export const clearOrders = () => ({
+  type: OrdersActionTypes.CLEAR_ORDERS
+})

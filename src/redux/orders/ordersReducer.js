@@ -27,6 +27,11 @@ const ordersReducer = (currentState = INITIAL_STATE, action) => {
         errorMessage: "",
         userOrders: action.payload
       }
+    case OrdersActionTypes.CLEAR_ORDERS:
+      return {
+        ...currentState,
+        userOrders: null
+      }
     default:
       return currentState;
   }

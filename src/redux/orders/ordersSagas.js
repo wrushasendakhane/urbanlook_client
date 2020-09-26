@@ -1,7 +1,8 @@
+
 import { takeLatest, call, put, all, select } from "redux-saga/effects"
 import { convertOrdersSnapshotToMap, firestore } from '../../firebase/firebase.utils';
 import OrdersActionTypes from "./ordersActionTypes";
-import { fetchOrdersFailure, fetchOrdersSuccess } from './ordersActions';
+import { clearOrders, fetchOrdersFailure, fetchOrdersSuccess } from './ordersActions';
 import { selectCurrentUser } from '../user/userSelectors';
 import UserActionTypes from "../user/userActionTypes";
 
@@ -25,6 +26,14 @@ export function* onSignInSuccess() {
   yield takeLatest(UserActionTypes.SIGN_IN_SUCCESS, fetchOrdersStartAsync)
 }
 
+export function* clearOrdersOnSignOut() {
+  yield put(clearOrders())
+}
+
+export function* onSignOutSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_OUT_SUCCESS, clearOrdersOnSignOut)
+}
+
 export function* orderSagas() {
-  yield all([call(fetchOrdersStart), call(onSignInSuccess)])
+  yield all([call(fetchOrdersStart), call(onSignInSuccess), call(onSignOutSuccess)])
 }

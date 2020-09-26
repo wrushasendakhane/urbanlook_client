@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import dateformat from "dateformat";
@@ -9,14 +9,30 @@ import {
 } from "../../redux/orders/ordersSelector";
 import Spinner from "../spinner/Spinner";
 import { fetchOrdersStart } from "../../redux/orders/ordersActions";
+import { selectCurrentUser } from "../../redux/user/userSelectors";
 
-function OrdersPage({ userOrders, isLoading, error, fetchOrders }) {
-  return error ? (
+function OrdersPage({
+  currentUser,
+  userOrders,
+  isLoading,
+  error,
+  fetchOrders,
+  history,
+}) {
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  useEffect(() => {
+    if (!currentUser) history.push("/");
+  }, [currentUser]);
+
+  return isLoading ? (
+    <Spinner />
+  ) : error ? (
     <div className="alert alert-danger text-center mt-2" role="alert">
       {error.message}
     </div>
-  ) : isLoading ? (
-    <Spinner />
   ) : (
     <div className="container">
       <h3>ORDER HISTORY</h3>
@@ -55,6 +71,7 @@ const mapStateToProps = createStructuredSelector({
   userOrders: selectUserOrders,
   isLoading: selectIsFetching,
   error: selectError,
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({

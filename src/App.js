@@ -31,7 +31,7 @@ function App({ currentUser, checkUserSession, fetchSectionsStart }) {
         />
         <Route path="/checkout" component={CheckoutPage} />
         <Route path="/orders" component={OrdersPage} />
-        <Route path="/" component={HomePage} />
+        <Route exact path="/" component={HomePage} />
       </Switch>
     </div>
 
