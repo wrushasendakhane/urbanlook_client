@@ -31,5 +31,5 @@ Styled components to customize the components
   "styled-components": "^5.2.0" 
 
 ### Reference Udemy course
-https://www.udemy.com/course/complete-react-developer-zero-to-mastery/ \
+https://www.udemy.com/course/complete-react-developer-zero-to-mastery/ 
 
